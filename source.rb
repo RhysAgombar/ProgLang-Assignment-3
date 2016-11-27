@@ -84,6 +84,10 @@ def selection_sort(list)
   sortedFile.close
 end
 
+def quick_sort(list)
+  
+end
+
 createUnsortedFile(10000)
 lines = loadArray("unsorted.txt")
 selection_sort(lines)
