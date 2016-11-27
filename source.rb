@@ -84,12 +84,43 @@ def selection_sort(list)
   sortedFile.close
 end
 
-def quick_sort(list)
+def qSort(list) 
+  pivot = list.size - 1
+  left = []
+  right = []
+  
+  for pos in 0 ... list.size
+    if list.at(pos) > list.at(pivot)
+      right << list.at(pos)
+    else
+      left << list.at(pos)
+    end
+  end
+  
+  puts left
+  puts "-----"
+  puts list.at(pivot)
+  puts "-----"
+  puts right  
   
 end
 
-createUnsortedFile(10000)
-lines = loadArray("unsorted.txt")
-selection_sort(lines)
-merge_sort(lines)
+def quick_sort(list)
+  start = Time.now
+  result = qSort(list)
+  stop = Time.now
+  delta = (stop - start)
+  
+  puts "Quick Sort took: " << delta.to_s << " seconds - List size: " << result.size().to_s
 
+  fname = "QuickSorted.txt"
+  sortedFile = File.open(fname, "w")
+  sortedFile.puts result
+  sortedFile.close
+end
+
+createUnsortedFile(6)
+lines = loadArray("unsorted.txt")
+##selection_sort(lines)
+##merge_sort(lines)
+quick_sort(lines)
