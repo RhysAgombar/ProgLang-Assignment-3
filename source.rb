@@ -32,13 +32,9 @@ def split(list)
 end
 
 def merge_sort(list)
-  start = Time.now
   result = split(list)
-  stop = Time.now
-  delta = (stop - start)
+  puts "Merge Sort Complete"
   
-  puts "Merge Sort took: " << delta.to_s << " seconds - List size: " << result.size().to_s
-
   fname = "mergeSorted.txt"
   sortedFile = File.open(fname, "w")
   sortedFile.puts result
@@ -64,13 +60,9 @@ def sSort(list)
 end
 
 def selection_sort(list)
-  start = Time.now
-  result = sSort(list)
-  stop = Time.now
-  delta = (stop - start)
+  result = sSort(list)  
+  puts "Selection Sort Complete" 
   
-  puts "Selection Sort took: " << delta.to_s << " seconds - List size: " << result.size().to_s
-
   fname = "selectionSorted.txt"
   sortedFile = File.open(fname, "w")
   sortedFile.puts result
@@ -103,21 +95,24 @@ def qSort(list)
 end
 
 def quick_sort(list)
-  start = Time.now
   result = qSort(list)
-  stop = Time.now
-  delta = (stop - start)
-  
-  puts "Quick Sort took: " << delta.to_s << " seconds - List size: " << list.size().to_s
-  #puts result
+  puts "Quick Sort Complete"
 
-  fname = "QuickSorted.txt"
+  fname = "quickSorted.txt"
   sortedFile = File.open(fname, "w")
   sortedFile.puts result
   sortedFile.close
 end
 
-createUnsortedFile(20000)
+def bSort(list)
+  
+end
+
+def bubble_sort(list)
+  
+end
+
+createUnsortedFile(200)
 lines = loadArray("unsorted.txt")
 selection_sort(lines)
 merge_sort(lines)
