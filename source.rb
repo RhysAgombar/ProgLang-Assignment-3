@@ -20,13 +20,13 @@ end
 def split(list)
   mid = list.size/2
   if (list.size > 2)
-    ret = split(list[0..mid-1]).concat(split(list[mid..-1])).sort
+    ret = sSort(split(list[0..mid-1]).concat(split(list[mid..-1])))
     return ret
   else
     if (list.size == 1)
       return list
     else 
-      return list.sort
+      return sSort(list)
     end
   end
 end
@@ -51,23 +51,16 @@ def sSort(list)
     for pos in 0 ... list.size
       holderPos = pos
       for pos2 in pos ... list.size
-
-        if (list.at(pos2) < list.at(pos))
-          
+        if (list.at(pos2) < list.at(pos))          
           if (list.at(pos2) < list.at(holderPos))
             holderPos = pos2
           end
-          
         end
-
-      end  
-      
-      list[pos], list[holderPos] = list[holderPos], list[pos]
-          
+      end        
+      list[pos], list[holderPos] = list[holderPos], list[pos]          
     end
-    
-    return list
-    
+        
+    return list    
 end
 
 def selection_sort(list)
@@ -85,24 +78,28 @@ def selection_sort(list)
 end
 
 def qSort(list) 
+  #puts list
   pivot = list.size - 1
   left = []
   right = []
-  
+
   for pos in 0 ... list.size
     if list.at(pos) > list.at(pivot)
       right << list.at(pos)
-    else
+    elsif list.at(pos) < list.at(pivot)
       left << list.at(pos)
     end
   end
   
-  puts left
-  puts "-----"
-  puts list.at(pivot)
-  puts "-----"
-  puts right  
-  
+  if left.size > 1
+    left = qSort(left)
+  end
+    
+  if right.size > 1
+    right = qSort(right)
+  end
+    
+  return left << list.at(pivot) << right
 end
 
 def quick_sort(list)
@@ -111,7 +108,8 @@ def quick_sort(list)
   stop = Time.now
   delta = (stop - start)
   
-  puts "Quick Sort took: " << delta.to_s << " seconds - List size: " << result.size().to_s
+  puts "Quick Sort took: " << delta.to_s << " seconds - List size: " << list.size().to_s
+  #puts result
 
   fname = "QuickSorted.txt"
   sortedFile = File.open(fname, "w")
@@ -119,8 +117,8 @@ def quick_sort(list)
   sortedFile.close
 end
 
-createUnsortedFile(6)
+createUnsortedFile(20000)
 lines = loadArray("unsorted.txt")
-##selection_sort(lines)
-##merge_sort(lines)
+selection_sort(lines)
+merge_sort(lines)
 quick_sort(lines)
