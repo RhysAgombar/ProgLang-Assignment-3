@@ -104,9 +104,10 @@ def qSort(list)
     
   return retList.flatten(1)
 end
+
 def quick_sort(list)
   result = qSort(list)
-  puts "\nQuick Sort Complete"
+  puts "Quick Sort Complete"
 
   result.each { |item| printList(item)}
 
