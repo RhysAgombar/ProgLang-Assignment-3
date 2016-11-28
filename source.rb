@@ -2,7 +2,7 @@
 
 def genStrings
   charset = %w{ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z }
-  (0...6).map{ charset.to_a[rand(charset.size)] }.join
+  (0...3).map{ charset.to_a[rand(charset.size)] }.join
 end
 
 def createUnsortedFile(num)
@@ -74,6 +74,7 @@ def qSort(list)
   pivot = list.size - 1
   left = []
   right = []
+  retList = []
 
   for pos in 0 ... list.size
     if list.at(pos) > list.at(pivot)
@@ -90,18 +91,29 @@ def qSort(list)
   if right.size > 1
     right = qSort(right)
   end
+  
+  if (left.size > 0)
+    retList << left
+  end  
+  
+  retList << list.at(pivot)
+  
+  if (right.size > 0)
+    retList << right
+  end 
     
-  return left << list.at(pivot) << right
+  return retList.flatten(1)
 end
-
 def quick_sort(list)
   result = qSort(list)
-  puts "Quick Sort Complete"
+  puts "\nQuick Sort Complete"
 
-  fname = "quickSorted.txt"
-  sortedFile = File.open(fname, "w")
-  sortedFile.puts result
-  sortedFile.close
+  result.each { |item| printList(item)}
+
+  #fname = "quickSorted.txt"
+  #sortedFile = File.open(fname, "w")
+  #sortedFile.puts result
+  #sortedFile.close
 end
 
 def bSort(list)
@@ -112,8 +124,20 @@ def bubble_sort(list)
   
 end
 
-createUnsortedFile(200)
-lines = loadArray("unsorted.txt")
-selection_sort(lines)
-merge_sort(lines)
-quick_sort(lines)
+#createUnsortedFile(200)
+#lines = loadArray("unsorted.txt")
+#selection_sort(lines)
+#merge_sort(lines)
+#quick_sort($uList)
+
+def printList(text)
+  print text
+  print " "
+end
+
+$uList = (0...6).map{ genStrings }
+
+$uList.each { |item| printList(item)}
+
+quick_sort($uList)
+
