@@ -4,7 +4,6 @@ def genStrings
 end
 
 def qSort(list, start, stop, pivotPos) 
-  #puts list
   pivot = list.size - 1
   left = []
   right = []
@@ -32,28 +31,22 @@ def qSort(list, start, stop, pivotPos)
     $uList[i] =  right.at(pos)
     i += 1
   end
-  
-  
-  #$disp += "\n"
-  #$uList.each { |item| printList(item)}
-
-    #for i in 0 ... $uList.size
-    #  if (i == pivotPos)
-    #    $t = para $uList[i], :font => "Monospace 12px", :stroke => red
-    #  elsif (i >= (pivotPos - left.size) & i < pivotPos)
-    #    $t = para $uList[i], :font => "Monospace 12px", :stroke => green
-    #  else
-    #    $t = para $uList[i], :font => "Monospace 12px", :stroke => black
-    #  end
-    #end
     
     for i in 0 ... $uList.size
       if (i == pivotPos)
         $t = para $uList[i], :font => "Monospace 12px", :stroke => red
       elsif ((i >= (pivotPos - left.size)) & (i < pivotPos))
-        $t = para $uList[i], :font => "Monospace 12px", :stroke => green
+        if ((left.size > 1) & (i == pivotPos - 1))
+          $t = para $uList[i], :font => "Monospace 12px", :stroke => green, underline: "single"
+        else
+          $t = para $uList[i], :font => "Monospace 12px", :stroke => green
+        end
       elsif ((i > pivotPos) & (i <= pivotPos + right.size))
-        $t = para $uList[i], :font => "Monospace 12px", :stroke => blue
+        if ((right.size > 1) & (i == pivotPos + right.size))
+          $t = para $uList[i], :font => "Monospace 12px", :stroke => blue, underline: "single"
+        else
+          $t = para $uList[i], :font => "Monospace 12px", :stroke => blue
+        end
       else
         $t = para $uList[i], :font => "Monospace 12px", :stroke => black
       end
@@ -91,20 +84,10 @@ def quick_sort(list, start, stop, pivotPos)
   $t = para "Quick Sort Complete", :font => "Monospace 12px", :stroke => black
   $t = para "\n", :font => "Monospace 12px", :stroke => black
 
-  #$disp += "\n"
-  
   for i in 0 ... $uList.size
       $t = para $uList[i], :font => "Monospace 12px", :stroke => black
   end
-  
-  $t = para $disp, :font => "Monospace 12px", :stroke => black
-  #$t.replace $disp
-end
 
-def printList(text)
-  $disp += text
-  
-  $disp += " "
 end
 
 Shoes.app :width => 700, :height => 415 do
@@ -117,10 +100,10 @@ Shoes.app :width => 700, :height => 415 do
 
   ##$disp = edit_box width: 700, height: 385
 
-  $t = para "", :font => "Monospace 12px", :stroke => black
+  #$t = para "", :font => "Monospace 12px", :stroke => black
 
   #button "Quick Sort" do
-    $disp = ""
+    #$disp = ""
     
     $uList = (0...6).map{ genStrings }
     
