@@ -3,6 +3,8 @@ def genStrings
   return (0...3).map{ charset.to_a[rand(charset.size)] }.join
 end
 
+## :displace_top => -20 for every line
+
 def bSort(list)
   swapped = true
   
@@ -176,8 +178,6 @@ def bButtonClick
   clear()
   
   genButtons
-  
-  #$t = para "\n", :font => "Monospace 1px", underline: "single"
   
   $uList = (0...4).map{ genStrings }
     
